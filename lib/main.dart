@@ -7,7 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 void main() {
   runApp(MyApp());
 }
-
+ //SHA1: C0:7A:B1:48:D9:4B:BD:93:0F:70:EE:94:69:D9:C8:3A:FF:7A:9B:7B
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override

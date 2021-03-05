@@ -36,6 +36,8 @@ dependencies:
   firebase_storage: ^8.0.0
   cached_network_image: ^3.0.0-nullsafety
   url_launcher: ^6.0.2
+  firebase_auth: ^1.0.0
+  firebase_core: ^1.0.0
 
 dev_dependencies:
   flutter_test:
