@@ -32,11 +32,11 @@ dependencies:
   fancy_dialog: ^1.0.4
   cloud_firestore: ^1.0.0
   http: ^0.13.0
-  image_picker: ^0.7.2
+  image_picker: ^0.7.2+1
   firebase_storage: ^8.0.0
   cached_network_image: ^3.0.0-nullsafety
   url_launcher: ^6.0.2
-  firebase_auth: ^1.0.0
+  firebase_auth: ^1.0.1
   firebase_core: ^1.0.0
   modal_progress_hud: ^0.1.3
 

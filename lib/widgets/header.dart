@@ -20,8 +20,8 @@ class WaveClip extends StatelessWidget {
                       begin: Alignment.topRight,
                       end: Alignment.bottomLeft,
                       colors: [
-                        Color(0xFFFF0156),
-                        Color(0xFFF33F7B),
+                        Color(0xFFFF0101),
+                        Color(0xFFF33F3F),
                       ],
                     ),
                     // image: DecorationImage(

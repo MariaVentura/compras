@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:compras/models/productos_model.dart';
 import 'package:compras/pages/otra_pagina.dart';
+import 'package:compras/pages/crear_productos.dart';
 import 'package:compras/pages/pedido_lista.dart';
 import 'package:compras/services/firebase_services.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -123,7 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
               padding: EdgeInsets.only(top: 50.0),
               children: <Widget>[
                 Container(
-                  height: 110,
+                  height: 120,
                   child: new UserAccountsDrawerHeader(
                     accountName: new Text(''),
                     accountEmail: new Text(''),
@@ -192,7 +193,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.white,
                   ),
                   onTap: () => Navigator.of(context).push(new MaterialPageRoute(
-                    builder: (BuildContext context) => OtraPagina(),
+                    builder: (BuildContext context) => CrearProductos(),
                   )),
                 ),
                 new Divider(),
