@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class ProductosModel {
   var id;
   String name;
@@ -12,10 +10,11 @@ class ProductosModel {
       String name,
       String image,
       int price,
-      int quantity,);
+      int quantity,
+      );
 
   ProductosModel.map(dynamic obj) {
-    this.id = obj['íd'];
+    this.id = obj['id'];
     this.name = obj['name'];
     this.image = obj['image'];
     this.price = obj['price'];
@@ -25,7 +24,7 @@ class ProductosModel {
   Map<String, dynamic> toMap() {
     var map = new Map<String, dynamic>();
 
-    map['íd'] = id;
+    map['id'] = id;
     map['name'] = name;
     map['image'] = image;
     map['price'] = price;

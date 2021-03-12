@@ -4,6 +4,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
+import 'package:modal_progress_hud/modal_progress_hud.dart';
+
 class CommonThings {
   static Size size;
 }
@@ -109,7 +111,7 @@ class _CrearProductosState extends State<CrearProductos> {
       if (_foto != null) {
         final Reference fireStoreRef = FirebaseStorage.instance
             .ref()
-            .child('productos')
+            .child('Productos')
             .child('$name.jpg');
         final UploadTask task = fireStoreRef.putFile(
             _foto, SettableMetadata(contentType: 'image/jpeg'));
@@ -127,7 +129,7 @@ class _CrearProductosState extends State<CrearProductos> {
                   })
                   .then((value) => Navigator.of(context).pop())
                   .catchError(
-                      (onError) => print('Error al registrar su produtos bd'));
+                      (onError) => print('Error al registrar'));
               _isInAsyncCall = false;
             });
           });
@@ -141,23 +143,100 @@ class _CrearProductosState extends State<CrearProductos> {
               'price': price,
             })
             .then((value) => Navigator.of(context).pop())
-            .catchError((onError) => print('Error al registrar su receta bd'));
+            .catchError((onError) => print('Error al registrar'));
         _isInAsyncCall = false;
       }
     } else {
-      print('objeto no validado');
+      print('Objeto no validado');
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text(
-          'Crear Productos',
-          style: TextStyle(fontSize: 15.0),
+        appBar: AppBar(
+          title: Text('Agregar Producto'),
         ),
-      ),
-    );
+        body: ModalProgressHUD(
+          inAsyncCall: _isInAsyncCall,
+          opacity: 0.5,
+          dismissible: false,
+          progressIndicator: CircularProgressIndicator(),
+          color: Colors.blueGrey,
+          child: SingleChildScrollView(
+            padding: EdgeInsets.only(left: 10, right: 15),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Container(
+                        child: GestureDetector(
+                          onTap: getImage,
+                        ),
+                        margin: EdgeInsets.only(top: 20),
+                        height: 120,
+                        width: 120,
+                        decoration: BoxDecoration(
+                            border: Border.all(width: 1.0, color: Colors.black),
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: _foto == null
+                                    ? AssetImage('assets/images/reloj.gif')
+                                    : FileImage(_foto))),
+                      )
+                    ],
+                  ),
+                  Text('Click para cambiar foto'),
+                  Padding(
+                    padding: EdgeInsets.only(top: 10),
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                        hintText: 'Nombre',
+                      fillColor: Colors.grey[300],
+                      filled: true,
+                    ),
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Por favor, ingrese nombre';
+                      }
+                    },
+                    onSaved: (value) => name = value.trim(),
+                  ),
+                  TextFormField(
+                    maxLines: 5,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Precio',
+                      fillColor: Colors.grey[300],
+                      filled: true,
+                    ),
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Por favor, ingrese precio';
+                      }
+                    },
+                    onSaved: (value) => price = int.parse(value),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      RaisedButton(
+                        onPressed: _enviar,
+                        child: Text('Crear',
+                            style: TextStyle(color: Colors.white)),
+                        color: Colors.green,
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ),
+        ));
   }
 }
