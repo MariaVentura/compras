@@ -227,7 +227,7 @@ class _CartState extends State<Cart> {
               ),
               Container(
                 height: 100,
-                width: 200,
+                width: 170,
                 padding: EdgeInsets.only(top: 50),
                 child: ElevatedButton(
                   child: Text("PAGAR"),
