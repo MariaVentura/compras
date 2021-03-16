@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:compras/models/productos_model.dart';
 import 'package:fancy_dialog/FancyAnimation.dart';
-import 'package:fancy_dialog/FancyGif.dart';
 import 'package:fancy_dialog/FancyTheme.dart';
 import 'package:fancy_dialog/fancy_dialog.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,6 +18,7 @@ class Cart extends StatefulWidget {
 
 class _CartState extends State<Cart> {
   _CartState(this._cart);
+
   final _scrollController = ScrollController();
   var _firstScroll = true;
   bool _enabled = false;
@@ -94,148 +94,154 @@ class _CartState extends State<Cart> {
           },
           child: SingleChildScrollView(
               child: Column(
-                children: <Widget>[
-                  ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: _cart.length,
-                    itemBuilder: (context, index) {
-                      //final String imagen = _cart[index].image;
-                      var item = _cart[index];
-                      return Column(
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 8.0, vertical: 2.0),
-                            child: Column(
+            children: <Widget>[
+              ListView.builder(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: _cart.length,
+                itemBuilder: (context, index) {
+                  //final String imagen = _cart[index].image;
+                  var item = _cart[index];
+                  return Column(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0, vertical: 2.0),
+                        child: Column(
+                          children: <Widget>[
+                            Row(
                               children: <Widget>[
-                                Row(
+                                Expanded(
+                                    child: Container(
+                                  width: 90,
+                                  height: 90,
+                                  child: CachedNetworkImage(
+                                      imageUrl: '${item.image}' + '?alt=media',
+                                      fit: BoxFit.cover,
+                                      placeholder: (_, __) {
+                                        return Center(
+                                            child: CupertinoActivityIndicator(
+                                          radius: 15,
+                                        ));
+                                      }),
+                                )),
+                                Column(
                                   children: <Widget>[
-                                    Expanded(
-                                        child: Container(
-                                          width: 90,
-                                          height: 90,
-                                          child: CachedNetworkImage(
-                                              imageUrl: '${item.image}' + '?alt=media',
-                                              fit: BoxFit.cover,
-                                              placeholder: (_, __) {
-                                                return Center(
-                                                    child: CupertinoActivityIndicator(
-                                                      radius: 15,
-                                                    ));
-                                              }),
-                                        )),
-                                    Column(
-                                      children: <Widget>[
-                                        Text(item.name,
-                                            style: new TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 16.0,
-                                                color: Colors.black)),
-                                        Row(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                          children: <Widget>[
-                                            Container(
-                                              width: 120,
-                                              height: 40,
-                                              decoration: BoxDecoration(
-                                                  color: Colors.red[600],
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      blurRadius: 6.0,
-                                                      color: Colors.grey[400],
-                                                      offset: Offset(0.0, 1.0),
-                                                    )
-                                                  ],
-                                                  borderRadius: BorderRadius.all(
-                                                    Radius.circular(50.0),
-                                                  )),
-                                              margin: EdgeInsets.only(top: 20.0),
-                                              padding: EdgeInsets.all(2.0),
-                                              child: new Row(
-                                                mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                                children: <Widget>[
-                                                  SizedBox(
-                                                    height: 8.0,
-                                                  ),
-                                                  IconButton(
-                                                    icon: Icon(Icons.remove),
-                                                    onPressed: () {
-                                                      setState(() {
-                                                        _cart[index].quantity--;
-                                                        valorTotal(_cart);
-                                                      });
-                                                    },
-                                                    color: Colors.white,
-                                                  ),
-                                                  Text('${_cart[index].quantity}',
-                                                      style: new TextStyle(
-                                                          fontWeight:
-                                                          FontWeight.bold,
-                                                          fontSize: 22.0,
-                                                          color: Colors.white)),
-                                                  IconButton(
-                                                    icon: Icon(Icons.add),
-                                                    onPressed: () {
-                                                      setState(() {
-                                                        _cart[index].quantity++;
-                                                        valorTotal(_cart);
-                                                      });
-                                                    },
-                                                    color: Colors.white,
-                                                  ),
-                                                  SizedBox(
-                                                    height: 8.0,
-                                                  )
-                                                ],
-                                              ),
-                                            )
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      width: 38.0,
-                                    ),
-                                    Text(item.price.toString(),
+                                    Text(item.name,
                                         style: new TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 24.0,
-                                            color: Colors.black))
+                                            fontSize: 16.0,
+                                            color: Colors.black)),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        Container(
+                                          width: 120,
+                                          height: 40,
+                                          decoration: BoxDecoration(
+                                              color: Colors.red[600],
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  blurRadius: 6.0,
+                                                  color: Colors.grey,
+                                                  offset: Offset(0.0, 1.0),
+                                                )
+                                              ],
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(50.0),
+                                              )),
+                                          margin: EdgeInsets.only(top: 20.0),
+                                          padding: EdgeInsets.all(2.0),
+                                          child: new Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: <Widget>[
+                                              SizedBox(
+                                                height: 8.0,
+                                              ),
+                                              IconButton(
+                                                icon: Icon(Icons.remove),
+                                                onPressed: () {
+                                                  setState(() {
+                                                    if( _cart[index].quantity>0)
+                                                    _cart[index].quantity--;
+                                                    valorTotal(_cart);
+                                                  });
+                                                },
+                                                color: Colors.white,
+                                              ),
+                                              Text('${_cart[index].quantity}',
+                                                  style: new TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 20.0,
+                                                      color: Colors.white)),
+                                              IconButton(
+                                                icon: Icon(Icons.add),
+                                                onPressed: () {
+                                                  setState(() {
+                                                    _cart[index].quantity++;
+                                                    valorTotal(_cart);
+                                                  });
+                                                },
+                                                color: Colors.white,
+                                              ),
+                                              SizedBox(
+                                                height: 8.0,
+                                              )
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    )
                                   ],
                                 ),
+                                SizedBox(
+                                  width: 38.0,
+                                ),
+                                Text(item.price.toString(),
+                                    style: new TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 24.0,
+                                        color: Colors.black))
                               ],
                             ),
-                          ),
-                          Divider(
-                            color: Colors.grey[700],
-                          )
-                        ],
-                      );
-                    },
+                          ],
+                        ),
+                      ),
+                      Divider(
+                        color: Colors.grey[700],
+                      )
+                    ],
+                  );
+                },
+              ),
+              SizedBox(
+                width: 10.0,
+              ),
+              pagoTotal(_cart),
+              SizedBox(
+                width: 20.0,
+              ),
+              Container(
+                height: 100,
+                width: 200,
+                padding: EdgeInsets.only(top: 50),
+                child: ElevatedButton(
+                  child: Text("PAGAR"),
+                  style: ElevatedButton.styleFrom(
+                    onPrimary: Colors.white,
+                    primary: Colors.green,
+                    shape: new RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(30.0),
+                    ),
                   ),
-                  SizedBox(
-                    width: 10.0,
-                  ),
-                  pagoTotal(_cart),
-                  SizedBox(
-                    width: 20.0,
-                  ),
-                  Container(
-                    height: 100,
-                    width: 200,
-                    padding: EdgeInsets.only(top: 50),
-                    child: RaisedButton(
-                      textColor: Colors.white,
-                      color: Colors.green,
-                      child: Text("PAGAR"),
-                      onPressed: () => {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) => FancyDialog(
+                  onPressed: () => {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) => FancyDialog(
                               title: "Aceptar compra",
                               descreption: "Enviar por WhatsApp",
                               animationType: FancyAnimation.BOTTOM_TOP,
@@ -245,14 +251,11 @@ class _CartState extends State<Cart> {
                                 msgListaPedido(),
                               },
                             ))
-                      },
-                      shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(30.0),
-                      ),
-                    ),
-                  ),
-                ],
-              ))),
+                  },
+                ),
+              ),
+            ],
+          ))),
     );
   }
 
@@ -284,6 +287,5 @@ class _CartState extends State<Cart> {
     pedido = pedido + "TOTAL: " + valorTotal(_cart);
 
     await launch("https://wa.me/${51935876104}?text=$pedido");
-
   }
 }

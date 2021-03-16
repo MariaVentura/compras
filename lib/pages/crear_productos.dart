@@ -25,7 +25,7 @@ class _CrearProductosState extends State<CrearProductos> {
   File _foto;
   String urlFoto;
   bool _isInAsyncCall = false;
-  int price;
+  num price;
 
   TextEditingController priceInputController;
   TextEditingController nameInputController;
@@ -59,7 +59,7 @@ class _CrearProductosState extends State<CrearProductos> {
       content: Text('Abrir con'),
       title: Text('Seleccione imagen'),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
           onPressed: () {
             captureImage(SelectSource.camara);
             Navigator.of(context, rootNavigator: true).pop();
@@ -68,7 +68,7 @@ class _CrearProductosState extends State<CrearProductos> {
             children: <Widget>[Text('Camara'), Icon(Icons.camera)],
           ),
         ),
-        FlatButton(
+        TextButton(
           onPressed: () {
             captureImage(SelectSource.galeria);
             Navigator.of(context, rootNavigator: true).pop();
@@ -204,6 +204,7 @@ class _CrearProductosState extends State<CrearProductos> {
                       if (value.isEmpty) {
                         return 'Por favor, ingrese nombre';
                       }
+                      return null;
                     },
                     onSaved: (value) => name = value.trim(),
                   ),
@@ -219,17 +220,20 @@ class _CrearProductosState extends State<CrearProductos> {
                       if (value.isEmpty) {
                         return 'Por favor, ingrese precio';
                       }
+                      return null;
                     },
-                    onSaved: (value) => price = int.parse(value),
+                    onSaved: (value) => price = num.parse(value),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      RaisedButton(
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                        primary: Colors.green),
                         onPressed: _enviar,
                         child: Text('Crear',
                             style: TextStyle(color: Colors.white)),
-                        color: Colors.green,
+
                       ),
                     ],
                   )

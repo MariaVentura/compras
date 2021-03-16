@@ -2,14 +2,14 @@ class ProductosModel {
   var id;
   String name;
   String image;
-  int price;
+  num price;
   int quantity;
 
   ProductosModel(
       String documentID,
       String name,
       String image,
-      int price,
+      num price,
       int quantity,
       );
 
@@ -38,6 +38,6 @@ class ProductosModel {
     this.id = map['id'];
     this.image = map['image'];
     this.price = map['price'];
-    this.quantity = 0;
+    this.quantity = 1;
   }
 }
