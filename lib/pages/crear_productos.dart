@@ -34,6 +34,7 @@ class _CrearProductosState extends State<CrearProductos> {
   String id;
   final db = FirebaseFirestore.instance;
   final _formKey = GlobalKey<FormState>();
+  String nameImage;
   String name;
   String uid;
 
@@ -111,8 +112,8 @@ class _CrearProductosState extends State<CrearProductos> {
       if (_foto != null) {
         final Reference fireStoreRef = FirebaseStorage.instance
             .ref()
-            .child('Productos')
-            .child('$name.jpg');
+            .child('productos')
+            .child('$nameImage.jpg');
         final UploadTask task = fireStoreRef.putFile(
             _foto, SettableMetadata(contentType: 'image/jpeg'));
 
@@ -124,6 +125,7 @@ class _CrearProductosState extends State<CrearProductos> {
                   .collection('productos')
                   .add({
                     'name': name,
+                    'nameImage': nameImage,
                     'image': urlFoto,
                     'price': price,
                   })
@@ -139,6 +141,7 @@ class _CrearProductosState extends State<CrearProductos> {
             .collection('productos')
             .add({
               'name': name,
+              'nameImage': nameImage,
               'image': urlFoto,
               'price': price,
             })
@@ -192,6 +195,21 @@ class _CrearProductosState extends State<CrearProductos> {
                   Text('Click para cambiar foto'),
                   Padding(
                     padding: EdgeInsets.only(top: 10),
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Nombre Imagen',
+                      fillColor: Colors.grey[300],
+                      filled: true,
+                    ),
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Por favor, ingrese nombre Imagen';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) => nameImage = value.trim(),
                   ),
                   TextFormField(
                     decoration: InputDecoration(

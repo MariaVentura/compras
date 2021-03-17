@@ -12,11 +12,11 @@ class FirebaseService {
 
   FirebaseService.internal();
 
-  Future<ProductosModel> createProduct(String name, String image, num price, int quantity) async{
+  Future<ProductosModel> createProduct(String name, String image,nameImage, num price, int quantity) async{
     final TransactionHandler createTransaction = (Transaction tx) async {
       final DocumentSnapshot ds = await tx.get(productCollection.doc());
 
-      final ProductosModel producto = new ProductosModel(ds.id, name, image, price, quantity);
+      final ProductosModel producto = new ProductosModel(ds.id, name, image,nameImage, price, quantity);
       final Map<String, dynamic> data = producto.toMap();
       tx.set(ds.reference, data);
 

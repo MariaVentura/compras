@@ -258,8 +258,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         aspectRatio: 1,
                                         child: CachedNetworkImage(
                                             imageUrl:
-                                            '${_productosModel[index].image}' +
-                                                '?alt=media',
+                                            '${_productosModel[index].image}' +'?alt=media',
                                             fit: BoxFit.cover,
                                             placeholder: (_, __) {
                                               return Center(
@@ -304,8 +303,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         Expanded(
                                           child: CachedNetworkImage(
                                               imageUrl:
-                                              '${_productosModel[index].image}' +
-                                                  '?alt=media',
+                                              '${_productosModel[index].image}' +'?alt=media',
                                               fit: BoxFit.cover,
                                               placeholder: (_, __) {
                                                 return Center(

@@ -2,6 +2,7 @@ class ProductosModel {
   var id;
   String name;
   String image;
+  String nameImage;
   num price;
   int quantity;
 
@@ -9,6 +10,7 @@ class ProductosModel {
       String documentID,
       String name,
       String image,
+      String nameImage,
       num price,
       int quantity,
       );
@@ -17,6 +19,7 @@ class ProductosModel {
     this.id = obj['id'];
     this.name = obj['name'];
     this.image = obj['image'];
+    this.nameImage=obj['nameImage'];
     this.price = obj['price'];
     this.quantity = obj['quantity'];
   }
@@ -27,6 +30,7 @@ class ProductosModel {
     map['id'] = id;
     map['name'] = name;
     map['image'] = image;
+    map['nameImage'] = nameImage;
     map['price'] = price;
     map['quantity'] = quantity;
 
@@ -37,6 +41,7 @@ class ProductosModel {
     this.name = map['name'];
     this.id = map['id'];
     this.image = map['image'];
+    this.nameImage = map['nameImage'];
     this.price = map['price'];
     this.quantity = 1;
   }
